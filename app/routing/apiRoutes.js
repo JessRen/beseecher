@@ -18,11 +18,13 @@ module.exports = function(app)
   app.post('/api/friends', function(req, res) 
     {
     // setting the user input object
-    var userInput = req.body;
-    // console.log('userInput = ' + JSON.stringify(userInput));
+    var newFriend = req.body;
+    console.log('newFriend = ' + JSON.stringify(newFriend));
 
-    var userResponses = userInput.scores;
-    // console.log('userResponses = ' + userResponses);
+    // Add new user
+    friendsData.push(newFriend);
+    
+    var userResponses = newFriend.scores;
 
     // Compute beseeching match
     var matchName = '';
@@ -54,8 +56,7 @@ module.exports = function(app)
         }
     }
 
-    // Add new user
-    friendsData.push(userInput);
+   
 
     // Send appropriate response
     res.json({status: 'OK', matchName: matchName, matchProfile: matchProfile});
